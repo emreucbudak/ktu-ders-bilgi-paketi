@@ -1,0 +1,75 @@
+type Career = { tr: string; en: string; descriptionTr: string; descriptionEn: string };
+const career = (tr: string, en: string, descriptionTr: string, descriptionEn: string): Career => ({ tr, en, descriptionTr, descriptionEn });
+const programCareers: Record<string, Career[]> = {
+  BIL: [
+    career("Yazılım geliştirme", "Software development", "Web, mobil ve kurumsal uygulamaların tasarlanması ve geliştirilmesi.", "Designing and developing web, mobile and enterprise applications."),
+    career("Veri ve yapay zekâ", "Data and AI", "Verilerin analiz edilmesi ve öğrenen sistemler için çözümler geliştirilmesi.", "Analysing data and developing solutions for learning systems."),
+    career("Siber güvenlik", "Cybersecurity", "Uygulama, ağ ve sistemlerin güvenliğini destekleyen çalışmalar.", "Supporting the security of applications, networks and systems."),
+    career("Sistem ve ağ yönetimi", "Systems and networks", "Sunucu, ağ ve bulut altyapılarının kurulması ve yönetilmesi.", "Deploying and managing server, network and cloud infrastructure.")
+  ],
+  YAZ: [
+    career("Uygulama geliştirme", "Application development", "Kullanıcı ihtiyaçlarına yönelik web ve mobil ürünler geliştirilmesi.", "Building web and mobile products around user needs."),
+    career("Yazılım testi ve kalite", "Testing and quality", "Yazılımın doğruluğunu ve güvenilirliğini değerlendiren test süreçleri.", "Testing processes that assess software correctness and reliability."),
+    career("Yazılım mimarisi", "Software architecture", "Büyüyen uygulamalar için sürdürülebilir sistem yapıları tasarlanması.", "Designing maintainable system structures for growing applications."),
+    career("DevOps ve bulut", "DevOps and cloud", "Yazılımın derleme, dağıtım ve işletim süreçlerinin otomatikleştirilmesi.", "Automating software build, deployment and operation workflows.")
+  ],
+  ELE: [
+    career("Enerji sistemleri", "Energy systems", "Elektrik üretimi, iletimi ve enerji verimliliği üzerine çalışmalar.", "Work on electricity generation, transmission and energy efficiency."),
+    career("Elektronik tasarım", "Electronic design", "Elektronik devrelerin ve gömülü sistemlerin geliştirilmesi.", "Developing electronic circuits and embedded systems."),
+    career("Haberleşme teknolojileri", "Communication technologies", "Veri iletimi, kablosuz iletişim ve haberleşme altyapısı çözümleri.", "Solutions for data transmission, wireless communication and infrastructure."),
+    career("Kontrol ve otomasyon", "Control and automation", "Endüstriyel süreçler için izleme ve otomatik kontrol sistemleri.", "Monitoring and automatic control systems for industrial processes.")
+  ],
+  MIM: [
+    career("Mimari tasarım", "Architectural design", "Farklı ölçeklerde yapı projeleri ve mekânsal tasarım çalışmaları.", "Building projects and spatial design at different scales."),
+    career("Koruma ve restorasyon", "Conservation and restoration", "Tarihî yapıların belgelenmesi ve korunmasına yönelik çalışmalar.", "Documenting historic buildings and supporting their conservation."),
+    career("Şantiye koordinasyonu", "Construction coordination", "Tasarım kararlarının uygulamaya aktarılması ve saha koordinasyonu.", "Translating design decisions into practice and coordinating site work."),
+    career("Sürdürülebilir tasarım", "Sustainable design", "Kaynak kullanımını ve çevresel etkileri gözeten yapı çözümleri.", "Building solutions that consider resource use and environmental impact.")
+  ],
+  ICM: [
+    career("İç mekân tasarımı", "Interior design", "Konut, ofis ve ticari alanlar için kullanıcı odaklı mekân çözümleri.", "User-centred spatial solutions for homes, offices and commercial spaces."),
+    career("Mobilya tasarımı", "Furniture design", "İşlev, malzeme ve ergonomiyi birleştiren mobilya çalışmaları.", "Furniture design combining function, materials and ergonomics."),
+    career("Sergi ve deneyim alanları", "Exhibition spaces", "Sergi, fuar ve etkinlikler için mekânsal deneyimler tasarlanması.", "Designing spatial experiences for exhibitions, fairs and events."),
+    career("Uygulama ve proje takibi", "Project implementation", "Malzeme seçimi, detay çözümleri ve iç mekân uygulamalarının takibi.", "Material selection, detailing and coordination of interior implementation.")
+  ],
+  MAT: [
+    career("Veri analizi", "Data analysis", "Veri kümelerindeki örüntülerin matematiksel yöntemlerle incelenmesi.", "Examining patterns in datasets using mathematical methods."),
+    career("Finansal modelleme", "Financial modelling", "Risk ve finansal süreçlerin nicel modellerle değerlendirilmesi.", "Evaluating risk and financial processes through quantitative models."),
+    career("Algoritma geliştirme", "Algorithm development", "Hesaplama ve optimizasyon problemlerine yöntemler geliştirilmesi.", "Developing methods for computational and optimisation problems."),
+    career("Akademik araştırma", "Academic research", "İleri eğitimle kuramsal ve uygulamalı matematikte araştırma çalışmaları.", "Research in pure and applied mathematics through further study.")
+  ],
+  FIZ: [
+    career("Araştırma ve geliştirme", "Research and development", "Fiziksel süreçler ve yeni teknolojiler üzerine deneysel çalışmalar.", "Experimental work on physical processes and new technologies."),
+    career("Optik ve fotonik", "Optics and photonics", "Işık, lazer ve görüntüleme teknolojileriyle ilgili uygulamalar.", "Applications involving light, lasers and imaging technologies."),
+    career("Malzeme karakterizasyonu", "Material characterisation", "Malzemelerin fiziksel özelliklerinin ölçülmesi ve yorumlanması.", "Measuring and interpreting the physical properties of materials."),
+    career("Bilimsel hesaplama", "Scientific computing", "Fiziksel sistemlerin sayısal modeller ve simülasyonlarla incelenmesi.", "Studying physical systems through numerical models and simulations.")
+  ],
+  "BIL-YL": [
+    career("İleri Ar-Ge", "Advanced R&D", "Uzmanlık alanına yönelik yeni yöntemlerin geliştirilmesi ve sınanması.", "Developing and evaluating new methods within a specialist field."),
+    career("Yapay zekâ araştırmaları", "AI research", "Öğrenme algoritmalarının ve veri odaklı modellerin araştırılması.", "Investigating learning algorithms and data-driven models."),
+    career("Uzman sistem tasarımı", "Specialist system design", "Karmaşık hesaplama ihtiyaçlarına yönelik mimari ve teknik çözümler.", "Architectural and technical solutions for complex computing needs."),
+    career("Doktora ve akademi", "Doctoral study and academia", "Doktora eğitimiyle araştırma ve akademik çalışma yolunun sürdürülmesi.", "Continuing research and academic work through doctoral study.")
+  ],
+  MAK: [
+    career("Mekanik tasarım", "Mechanical design", "Makine ve bileşenlerin modellenmesi, analizi ve geliştirilmesi.", "Modelling, analysing and developing machines and components."),
+    career("Üretim mühendisliği", "Manufacturing engineering", "Üretim yöntemlerinin ve süreç verimliliğinin geliştirilmesi.", "Improving manufacturing methods and process efficiency."),
+    career("Enerji ve ısıl sistemler", "Energy and thermal systems", "Isıtma, soğutma ve enerji dönüşümü sistemlerine yönelik çözümler.", "Solutions for heating, cooling and energy conversion systems."),
+    career("Bakım ve güvenilirlik", "Maintenance and reliability", "Ekipman performansının izlenmesi ve bakım süreçlerinin planlanması.", "Monitoring equipment performance and planning maintenance processes.")
+  ],
+  IST: [
+    career("İş analitiği", "Business analytics", "İş süreçlerini ve kararları desteklemek için verilerin yorumlanması.", "Interpreting data to support business processes and decisions."),
+    career("Biyoistatistik", "Biostatistics", "Sağlık ve yaşam bilimlerindeki araştırma verilerinin analizi.", "Analysing research data in health and life sciences."),
+    career("Pazar araştırmaları", "Market research", "Anket tasarımı ve tüketici davranışlarının istatistiksel incelenmesi.", "Survey design and statistical analysis of consumer behaviour."),
+    career("Risk analizi", "Risk analysis", "Belirsizliklerin modellenmesi ve olası sonuçların değerlendirilmesi.", "Modelling uncertainty and evaluating potential outcomes.")
+  ],
+  BPR: [career("Yazılım destek uzmanlığı", "Software support", "Uygulama kurulumu, kullanıcı desteği ve temel sorun giderme.", "Application setup, user support and basic troubleshooting."), career("Web geliştirme", "Web development", "Web arayüzleri ve içerik yönetimi araçları hazırlama.", "Building web interfaces and content-management tools.")],
+  HEM: [career("Klinik bakım", "Clinical care", "Sağlık kuruluşlarında bakım ekipleriyle çalışma.", "Working with care teams in health services."), career("Toplum sağlığı", "Community health", "Sağlık eğitimi ve koruyucu sağlık çalışmalarına katılma.", "Supporting health education and prevention."), career("Evde bakım", "Home care", "Birey ve ailelere bakım süreçlerinde destek verme.", "Supporting individuals and families with care needs.")],
+  ISL: [career("İş analizi", "Business analysis", "İş süreçleri ve performans göstergelerini inceleme.", "Reviewing business processes and performance measures."), career("Pazarlama", "Marketing", "Pazar ve müşteri ihtiyaçlarını analiz etme.", "Analysing market and customer needs."), career("İnsan kaynakları", "Human resources", "İşe alım, eğitim ve çalışan gelişimini destekleme.", "Supporting recruitment, training and staff development.")],
+  ORM: [career("Orman planlama", "Forest planning", "Orman varlıkları için koruma ve yönetim planları hazırlama.", "Preparing conservation and management plans for forest resources."), career("Havza ve kaynak yönetimi", "Watershed and resource management", "Arazi, su ve doğal kaynak verilerini değerlendirme.", "Assessing land, water and natural-resource data."), career("Doğa koruma", "Conservation", "Ekosistemlerin izlenmesi ve restorasyon çalışmalarına katılma.", "Contributing to ecosystem monitoring and restoration.")],
+  DNB: [career("Su ürünleri yetiştiriciliği", "Aquaculture", "Üretim süreçlerini ve yetiştirme ortamlarını izleme.", "Monitoring production systems and aquaculture environments."), career("Balıkçılık yönetimi", "Fisheries management", "Balık stokları ve avcılık verileriyle yönetim kararlarını destekleme.", "Supporting management decisions with stock and catch data."), career("Deniz teknolojileri", "Marine technology", "Deniz araştırmaları ve üretim teknolojilerinde görev alma.", "Working with marine research and production technologies.")],
+  "BIL-DR": [career("Akademik araştırma", "Academic research", "Bilgisayar mühendisliğinde özgün araştırmalar yürütme.", "Conducting original research in computer engineering."), career("Ar-Ge liderliği", "R&D leadership", "Araştırma ekipleri ve ileri teknoloji projelerine yön verme.", "Leading research teams and advanced technology projects."), career("Uzman danışmanlık", "Specialist consulting", "Karmaşık bilişim sorunlarına araştırma temelli çözümler geliştirme.", "Developing research-informed solutions to complex computing problems.")],
+  INS: [career("Yapı tasarımı", "Structural design", "Yapı sistemlerinin analizine ve tasarımına katkı sağlama.", "Contributing to the analysis and design of structures."), career("Ulaştırma altyapısı", "Transport infrastructure", "Yol ve ulaşım projelerinin planlama ve uygulama süreçlerinde çalışma.", "Working on planning and delivery of road and transport projects."), career("Yapı yönetimi", "Construction management", "Şantiye, kalite ve proje süreçlerini koordine etme.", "Coordinating site, quality and project processes.")],
+  KIM: [career("Kimya laboratuvarları", "Chemistry laboratories", "Analiz, ölçüm ve kalite süreçlerini yürütme.", "Conducting analytical, measurement and quality processes."), career("Kimya sanayisi", "Chemical industry", "Üretim süreçlerinin geliştirilmesi ve izlenmesi.", "Improving and monitoring production processes."), career("Araştırma ve geliştirme", "Research and development", "Malzeme ve kimyasal süreçlere yönelik deneysel çalışmalar.", "Experimental work on materials and chemical processes.")],
+  EKO: [career("Ekonomik analiz", "Economic analysis", "Piyasa ve politika verilerini analiz etme.", "Analysing market and policy data."), career("Kamu politikası", "Public policy", "Politika seçeneklerinin ekonomik etkilerini değerlendirme.", "Evaluating the economic effects of policy options."), career("Finans ve planlama", "Finance and planning", "Bütçe ve ekonomik karar süreçlerini destekleme.", "Supporting budget and economic decision-making.")],
+  DEN: [career("Deniz araştırmaları", "Marine research", "Denizel yaşam ve çevre verileri üzerinde çalışma.", "Working with marine life and environmental data."), career("Biyoçeşitlilik ve koruma", "Biodiversity and conservation", "Deniz habitatlarını izleme ve koruma çalışmalarına katılma.", "Contributing to marine habitat monitoring and conservation."), career("Su ürünleri", "Aquatic resources", "Denizel kaynakların sürdürülebilir kullanımı üzerine çalışma.", "Working on sustainable use of marine resources.")]
+};
+export default programCareers;

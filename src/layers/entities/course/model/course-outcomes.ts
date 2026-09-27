@@ -1,0 +1,57 @@
+type Outcome = [string, string];
+// Sample outcomes for the prototype's course topics.
+const outcomes: Record<string, Outcome[]> = {
+ "Programlamaya Giriş": [["Koşul, döngü ve fonksiyonlarla çalışan bir program oluşturur.","Builds a working program using conditions, loops and functions."],["Temel sözdizimi ve mantık hatalarını belirleyip düzeltir.","Identifies and fixes basic syntax and logic errors."]],
+ "Veri Yapıları": [["Probleme uygun liste, yığın, kuyruk veya ağaç yapısını seçer.","Selects lists, stacks, queues or trees appropriate to a problem."],["Veri yapısı işlemlerinin zaman ve bellek maliyetini karşılaştırır.","Compares the time and memory costs of data structure operations."]],
+ "İşletim Sistemleri": [["Süreç ve bellek yönetiminin işleyişini açıklar.","Explains process and memory management."],["Kaynak paylaşımında eşzamanlılık problemlerini analiz eder.","Analyses concurrency problems in resource sharing."]],
+ "Bilgisayar Ağları": [["Ağ katmanlarının ve temel protokollerin görevlerini açıklar.","Explains the roles of network layers and basic protocols."],["Adresleme ve veri iletimi problemlerini çözümler.","Solves addressing and data transmission problems."]],
+ "Yazılım Mühendisliğine Giriş": [["Kullanıcı ihtiyaçlarını yazılım gereksinimlerine dönüştürür.","Translates user needs into software requirements."],["Yazılım geliştirme süreçlerini karşılaştırır.","Compares software development processes."]],
+ "Nesne Yönelimli Programlama": [["Bir problemi sınıf ve nesnelerle modeller.","Models a problem using classes and objects."],["Kalıtım ve çok biçimliliği uygun durumlarda uygular.","Applies inheritance and polymorphism appropriately."]],
+ "Yazılım Mimarisi": [["Kalite gereksinimlerine uygun mimari yaklaşımı seçer.","Selects an architecture suited to quality requirements."],["Bileşenler arasındaki bağımlılıkları değerlendirir.","Evaluates dependencies between components."]],
+ "Yazılım Testi": [["Beklenen davranışa göre test senaryoları hazırlar.","Prepares test cases based on expected behaviour."],["Test sonuçlarından hataları belirler ve raporlar.","Identifies and reports defects from test results."]],
+ "Devre Analizi": [["Devre yasalarıyla akım ve gerilimleri hesaplar.","Calculates currents and voltages using circuit laws."],["Devre elemanlarının güç ilişkilerini değerlendirir.","Evaluates power relationships in circuit elements."]],
+ "Elektronik": [["Yarı iletken elemanların çalışma davranışını açıklar.","Explains the operating behaviour of semiconductor devices."],["Temel elektronik devrelerin giriş ve çıkış ilişkilerini analiz eder.","Analyses input-output relationships in basic electronic circuits."]],
+ "Sinyaller ve Sistemler": [["Sinyalleri zaman ve frekans alanında gösterir.","Represents signals in time and frequency domains."],["Bir sistemin giriş sinyaline verdiği tepkiyi hesaplar.","Calculates a system's response to an input signal."]],
+ "Kontrol Sistemleri": [["Geri beslemeli bir sistemin matematiksel modelini kurar.","Builds a mathematical model of a feedback system."],["Sistem kararlılığını ve geçici durum tepkisini değerlendirir.","Evaluates stability and transient response."]],
+ "Temel Tasarım": [["Denge, ritim ve oran ilkeleriyle kompozisyon oluşturur.","Creates compositions using balance, rhythm and proportion."],["Biçim ve mekân ilişkilerini görsel çalışmalarla ifade eder.","Expresses form-space relationships through visual studies."]],
+ "Mimari Tasarım": [["Kullanıcı ihtiyaçlarına göre mekânsal kurgu geliştirir.","Develops spatial organisation based on user needs."],["Tasarım önerisini çizim ve modellerle sunar.","Presents a design proposal through drawings and models."]],
+ "Yapı Bilgisi": [["Yapı bileşenleri ve malzemeler arasındaki ilişkileri açıklar.","Explains relationships between building components and materials."],["Yapım yöntemine uygun temel detay çözümleri geliştirir.","Develops basic details suited to construction methods."]],
+ "Mimarlık Tarihi": [["Mimari yapıları tarihsel bağlamlarıyla ilişkilendirir.","Relates buildings to their historical contexts."],["Farklı dönemlerin yapı ve mekân anlayışlarını karşılaştırır.","Compares approaches to buildings and space across periods."]],
+ "İç Mekân Tasarımı": [["Kullanıcı ve işlev ihtiyaçlarına uygun iç mekân planı oluşturur.","Creates an interior plan suited to user and functional needs."],["Mekân kararlarını ergonomi ve dolaşım açısından değerlendirir.","Evaluates spatial decisions for ergonomics and circulation."]],
+ "Mobilya Tasarımı": [["Ergonomik gereksinimlere uygun mobilya önerisi geliştirir.","Develops furniture proposals suited to ergonomic needs."],["Malzeme ve üretim yöntemlerini tasarımla ilişkilendirir.","Relates materials and manufacturing methods to the design."]],
+ "Aydınlatma Tasarımı": [["Doğal ve yapay ışığın mekândaki etkilerini açıklar.","Explains the effects of natural and artificial light in a space."],["Görsel konforu gözeten aydınlatma önerisi geliştirir.","Develops a lighting proposal that considers visual comfort."]],
+ "Analiz": [["Limit, türev ve integral işlemlerini uygular.","Applies limits, derivatives and integrals."],["Fonksiyonların davranışlarını matematiksel olarak yorumlar.","Interprets the behaviour of functions mathematically."]],
+ "Lineer Cebir": [["Doğrusal denklem sistemlerini matris yöntemleriyle çözer.","Solves linear systems using matrix methods."],["Vektör uzaylarını ve doğrusal dönüşümleri analiz eder.","Analyses vector spaces and linear transformations."]],
+ "Diferansiyel Denklemler": [["Probleme uygun diferansiyel denklem modeli oluşturur.","Builds a differential equation model suited to a problem."],["Çözüm yöntemini seçer ve sonuçları yorumlar.","Selects a solution method and interprets results."]],
+ "Soyut Cebir": [["Grup, halka ve cisim yapılarını özelliklerine göre ayırt eder.","Distinguishes groups, rings and fields by their properties."],["Cebirsel önermeler için tutarlı ispatlar oluşturur.","Constructs coherent proofs for algebraic statements."]],
+ "Mekanik": [["Kuvvet ve hareket ilişkilerini matematiksel olarak modeller.","Models force-motion relationships mathematically."],["Enerji ve momentum korunumu ile problemleri çözer.","Solves problems using conservation of energy and momentum."]],
+ "Elektrik ve Manyetizma": [["Elektrik ve manyetik alanları temel yasalarla hesaplar.","Calculates electric and magnetic fields using fundamental laws."],["Alanların yükler üzerindeki etkilerini açıklar.","Explains the effects of fields on charges."]],
+ "Optik": [["Yansıma ve kırılma ile görüntü oluşumunu açıklar.","Explains image formation through reflection and refraction."],["Girişim ve kırınım olaylarını yorumlar.","Interprets interference and diffraction."]],
+ "Kuantum Fiziği": [["Temel kuantum kavramlarını klasik yaklaşımla karşılaştırır.","Compares basic quantum concepts with classical approaches."],["Basit kuantum modellerinin fiziksel sonuçlarını yorumlar.","Interprets the physical results of simple quantum models."]],
+ "Statik": [["Kuvvet ve moment dengesi denklemlerini kurar.","Formulates force and moment equilibrium equations."],["Durağan sistemlerde tepki kuvvetlerini hesaplar.","Calculates reaction forces in stationary systems."]],
+ "Dinamik": [["Hareketi konum, hız ve ivme ilişkileriyle analiz eder.","Analyses motion through position, velocity and acceleration."],["Kuvvet, enerji ve momentum yöntemleriyle hareket problemlerini çözer.","Solves motion problems using force, energy and momentum methods."]],
+ "Termodinamik": [["Isı ve iş etkileşimlerini enerji dengesiyle hesaplar.","Calculates heat and work interactions through energy balances."],["Termodinamik çevrimlerin verimliliğini değerlendirir.","Evaluates the efficiency of thermodynamic cycles."]],
+ "Makine Elemanları": [["Çalışma koşullarına uygun makine bileşenlerini seçer.","Selects machine components suited to operating conditions."],["Yük ve dayanım verileriyle temel boyutlandırma yapar.","Performs basic sizing using load and strength data."]],
+ "Olasılık": [["Rastlantısal olayların olasılıklarını hesaplar.","Calculates probabilities of random events."],["Rassal değişkenler için uygun dağılımları seçer.","Selects suitable distributions for random variables."]],
+ "İstatistiksel Çıkarım": [["Örneklem verilerinden parametre tahminleri elde eder.","Obtains parameter estimates from sample data."],["Hipotez testlerini uygular ve sonuçları yorumlar.","Applies hypothesis tests and interprets results."]],
+ "Regresyon Analizi": [["Değişkenler arasındaki ilişki için regresyon modeli kurar.","Builds regression models for relationships between variables."],["Model varsayımlarını ve tahmin hatalarını değerlendirir.","Evaluates model assumptions and prediction errors."]],
+ "Zaman Serileri": [["Verideki eğilim ve mevsimsel bileşenleri belirler.","Identifies trends and seasonal components in data."],["Tahmin modellerini hata ölçütleriyle karşılaştırır.","Compares forecasting models using error measures."]],
+ "İleri Algoritmalar": [["Probleme uygun ileri algoritma tasarım yöntemini seçer.","Selects advanced algorithm design methods appropriate to a problem."],["Algoritmaların doğruluğunu ve karmaşıklığını değerlendirir.","Evaluates algorithm correctness and complexity."]],
+ "Makine Öğrenmesi": [["Veriye ve probleme uygun öğrenme modelini kurar.","Builds a learning model suited to the data and problem."],["Modelin genelleme başarısını uygun doğrulama yöntemleriyle değerlendirir.","Evaluates generalisation using appropriate validation methods."]],
+ "Araştırma Yöntemleri": [["Araştırılabilir bir soru ve yöntem tasarlar.","Designs a researchable question and method."],["Bilimsel kaynakları eleştirel ve etik biçimde kullanır.","Uses scientific sources critically and ethically."]],
+ "Bilimsel Hesaplama": [["Bilimsel problemler için sayısal çözüm uygular.","Applies numerical solutions to scientific problems."],["Hesaplama hatasını ve sayısal kararlılığı değerlendirir.","Evaluates computational error and numerical stability."]],
+ "Akademik İletişim": [["Kaynaklara dayalı, tutarlı bir akademik metin oluşturur.","Produces a coherent, evidence-based academic text."],["Çalışmasını uygun kaynak gösterimiyle sözlü olarak sunar.","Presents work orally with appropriate source attribution."]],
+ "Alan Projesi": [["Proje hedeflerini, iş adımlarını ve zaman planını belirler.","Defines project goals, tasks and a schedule."],["Geliştirdiği çözümü ölçütlere göre değerlendirerek raporlar.","Evaluates a developed solution against criteria and reports it."]],
+ "Seçmeli Ders": [["Seçilen alandaki temel kavramları örneklerle açıklar.","Explains core concepts in the selected field through examples."],["Edindiği bilgileri kendi program alanıyla ilişkilendirir.","Relates acquired knowledge to the field of their program."]]
+};
+export function getCourseOutcomes(title: string): Outcome[] {
+ const specific=outcomes[title];
+ const base=specific || [
+  ["Dersin temel kavramlarını uygun bir örnek üzerinde uygular.","Applies the course's core concepts to an appropriate example."],
+  ["İlgili bir problemi temel yöntemlerle analiz eder.","Analyses a relevant problem using foundational methods."]
+ ];
+ return [...base,
+ ["Kullandığı yöntemi ve ulaştığı sonuçları gerekçeleriyle açıklar.","Explains the chosen method and results with supporting reasoning."],
+ ["Çözümünü veya çalışmasını uygun ölçütlerle kontrol ederek iyileştirir.","Checks and improves the solution or work using appropriate criteria."]
+ ];
+}
