@@ -1,112 +1,303 @@
 <div align="center">
-  <img src="./public/brand/ktu.svg" alt="Karadeniz Teknik Üniversitesi" width="110" />
-  <h1>KTÜ Ders Bilgi Paketi</h1>
-  <p><strong>Programları keşfet. Müfredatları incele. Derslerin ayrıntılarına ulaş.</strong></p>
-  <p>Karadeniz Teknik Üniversitesi akademik programları için tasarlanmış iki dilli katalog prototipi.</p>
-  <p>
-    <img src="https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs" alt="Next.js 16" />
-    <img src="https://img.shields.io/badge/React-19-149eca?logo=react" alt="React 19" />
-    <img src="https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript" alt="TypeScript" />
-    <img src="https://img.shields.io/badge/Architecture-Feature--Sliced-6c5ce7" alt="Feature-Sliced Design" />
-  </p>
+
+<img src="./public/brand/ktu.svg" alt="Karadeniz Teknik Üniversitesi" width="112" />
+
+# KTÜ Ders Bilgi Paketi
+
+### Programları keşfet, müfredatları incele, derslerin ayrıntılarına ulaş.
+
+Karadeniz Teknik Üniversitesi akademik programları için hazırlanmış iki dilli bir ders kataloğu tasarım prototipi.
+
+<br />
+
+![Next.js](https://img.shields.io/badge/Next.js-16.3.6-000000?logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=000000)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
+![Architecture](https://img.shields.io/badge/Architecture-Feature--Sliced-7C3AED)
+![Languages](https://img.shields.io/badge/Languages-Türkçe_%26_English-25A162)
+
 </div>
 
 ---
 
-> **İşyeri eğitimi projesi** · Bu çalışma, işyeri eğitimi kapsamında verilen KTÜ Ders Bilgi Paketi tasarım projesinin prototipidir. Program ve ders içeriklerinin bir bölümü örnek amaçlıdır; site resmî veya güncel akademik bilgi kaynağı değildir.
+> **İşyeri eğitimi projesi** · Bu çalışma, işyeri eğitimi kapsamında verilen KTÜ Ders Bilgi Paketi tasarım projesi için hazırlanmıştır. Bir arayüz ve kullanıcı akışı prototipidir; resmî KTÜ bilgi paketi değildir. Program ve ders içeriklerinin bir bölümü temsilî verilerden oluşur.
 
-## Proje hakkında
+## İçindekiler
 
-KTÜ’nün akademik programlarını ve ders bilgi paketlerini anlaşılır bir akışta sunmak için hazırlandı. Katalogdan bir program seçebilir, programın tanıtım bilgilerini inceleyebilir, dönemlik ders planına geçebilir ve dersin amaç, kazanım, iş yükü ve değerlendirme ayrıntılarını görüntüleyebilirsin.
+- [Genel bakış](#genel-bakış)
+- [Özellikler](#özellikler)
+- [Uygulama mimarisi](#uygulama-mimarisi)
+- [Tasarım ilkeleri](#tasarım-i̇lkeleri)
+- [Teknoloji yığını](#teknoloji-yığını)
+- [Proje yapısı](#proje-yapısı)
+- [Uygulama rotaları](#uygulama-rotaları)
+- [Başlangıç](#başlangıç)
+- [Komutlar](#kullanılabilir-komutlar)
+- [Veri ve kapsam notları](#veri-ve-kapsam-notları)
 
-Arayüz **Türkçe ve İngilizce** kullanılabilir. Program arama, filtreleme ve sıralama araçları katalogda gezinmeyi kolaylaştırır.
+---
 
-## Öne çıkanlar
+## Genel bakış
 
-| Program kataloğu | Program profili | Ders bilgi paketi |
-| --- | --- | --- |
-| Program adına veya koduna göre ara | Amaç, çıktılar ve kariyer bilgileri | Ders amacı ve öğrenme kazanımları |
-| Fakülte, derece ve dile göre filtrele | Sınıf ve dönem seçerek müfredata geç | Ön koşullar ve haftalık ders içeriği |
-| Sonuçları ada göre sırala | Dersleri ve dönem toplamlarını görüntüle | Kaynaklar, değerlendirme ve AKTS iş yükü |
+**KTÜ Ders Bilgi Paketi**, üniversitenin akademik programlarını ve ders bilgilerini tek bir keşif akışında bir araya getiren frontend prototipidir. Kullanıcılar program kataloğunda arama yapıp filtre uygulayabilir, program sayfalarındaki tanıtım bilgilerini inceleyebilir ve dönemlik ders planından derslerin ayrıntılı bilgi paketlerine ulaşabilir.
 
-## Ekran akışı
+Arayüz Türkçe ve İngilizce kullanılabilir. Dil tercihi sayfalar arasında korunur. Program ve ders ekranları masaüstü ve mobil görünümlere uyum sağlayacak şekilde hazırlanmıştır.
+
+### Kullanıcı akışı
 
 ```text
 Program kataloğu  →  Program profili  →  Dönemlik ders planı  →  Ders bilgi paketi
-        /                  /programlar/[id]     /ders-plani             /dersler/[code]
+        /                  /programlar/[id]   /ders-plani               /dersler/[code]
 ```
 
-| Rota | Ekran |
-| --- | --- |
-| `/` | Arama, filtreleme ve sıralama içeren program kataloğu |
+## Özellikler
+
+### Program kataloğu
+
+- Program adı, İngilizce adı veya program kodu ile arama
+- Fakülte / enstitü, öğrenim düzeyi ve öğretim dili filtreleri
+- Alfabetik artan ve azalan sıralama
+- Sayfalama ve eşleşme olmadığında filtreleri sıfırlama
+- Dar ekranlar için açılıp kapanan filtre alanı
+
+### Program profili
+
+- Programın amacı, tanıtımı ve program çıktıları
+- Program geçmişi, iletişim ve kariyer alanları
+- Sınıf ve dönem seçerek örnek müfredata geçiş
+- Ders, kredi, AKTS ve dönem toplamlarının görüntülenmesi
+
+### Ders planı
+
+- Akademik yıl, sınıf ve dönem seçimine göre ders listesi
+- Ders kodu üzerinden ders bilgi paketine geçiş
+- Zorunlu / seçmeli türü, kredi ve AKTS bilgileri
+- Dönem toplamı ve örnek iş yükü hesabı
+
+### Ders bilgi paketi
+
+- Ders amacı, ön koşullar ve haftalık içerik
+- Öğrenme kazanımları ve program çıktılarıyla ilişki matrisi
+- Ders kitabı ve ek kaynaklar
+- AKTS iş yükü ve ölçme-değerlendirme tabloları
+- Açılmayan veya kredisiz dersler için bilgilendirme durumları
+
+### Ortak deneyim
+
+- Türkçe / İngilizce arayüz seçimi
+- Paylaşılan başlık ve sayfa durum bileşenleri
+- Klavye odağı, atlama bağlantısı, etiketler ve ekran okuyucu açıklamaları
+- Azaltılmış hareket tercihi için stil desteği
+- Mobil ekranlara uyumlu katalog ve ders tabloları
+
+---
+
+## Uygulama mimarisi
+
+Uygulama **Next.js App Router** ile yönlendirilir; ekran ve alan kodları Vettingo-Frontend’de kullanılan **Feature-Sliced Design (FSD)** yaklaşımına benzer şekilde `src/layers` altında gruplanır.
+
+```mermaid
+flowchart LR
+    Browser[Tarayıcı] --> Router[Next.js App Router]
+    Router --> Routes[Route dosyaları]
+    Routes --> Pages[Pages]
+    Pages --> Widgets[Widgets]
+    Pages --> Entities[Entities]
+    Widgets --> Entities
+    Pages --> Shared[Shared]
+    Widgets --> Shared
+    Entities --> Shared
+    Entities --> Models[Program ve ders verileri]
+```
+
+### Katmanların sorumlulukları
+
+| Katman | Sorumluluk |
+|---|---|
+| **app** | Next.js rotaları, metadata, layout ve hata / yüklenme sınırları |
+| **pages** | Bir route’u oluşturan tam ekran bileşenleri |
+| **widgets** | Birden fazla ekranda kullanılabilen kapsamlı arayüz parçaları |
+| **entities** | Program ve ders alanı modelleri ile prototip verileri |
+| **shared** | Uygulamaya özgü olmayan ortak arayüz ve sağlayıcılar |
+
+Bağımlılıklar tek yönde ilerler: üst katmanlar alt katmanları birleştirir. Next.js `app` dosyaları route ve sunucu tarafı parametre işlerini tutar; ekran arayüzü page slice içinde tanımlanır. Page slice’ları `index.ts` dosyaları üzerinden dışa açılır.
+
+### Route ve ekran ayrımı
+
+`src/app` altındaki route dosyaları URL’yi karşılar, parametreleri doğrular, sayfa başlığını üretir ve ilgili page slice’ını çağırır. Örneğin `/programlar/[id]` route’u program kaydını bulur; program ekranının arayüzü `src/layers/pages/program-detail` içinde yer alır.
+
+Bu ayrım, Next.js dosya tabanlı yönlendirmesini korurken ekran kodunu katmanlı mimaride tutar.
+
+---
+
+## Tasarım ilkeleri
+
+### İçeriğe odaklı gezinme
+
+Katalog araması ve filtreleri ilk adımda program bulmayı sağlar. Program profili, ders planına; ders kodu ise doğrudan ilgili ders bilgi paketine bağlanır. Her detay ekranında önceki adıma dönüş bağlantısı ve sayfa yolu bulunur.
+
+### Türkçe ve İngilizce içerik
+
+Dil seçimi ortak sağlayıcı tarafından yönetilir ve `ktu_language` çereziyle saklanır. Program ve arayüz metinlerinde iki dil sunulur. İngilizce ders başlığının olmadığı yerlerde mevcut Türkçe başlık korunur ve kullanıcıya bilgi verilir.
+
+### Ayrı sorumluluklara sahip katmanlar
+
+- Route ve metadata işlemleri `app/` altında kalır.
+- Tam ekran bileşenleri `layers/pages/` altındadır.
+- Müfredat seçimi, çıktı matrisi ve haftalık içerik gibi büyük arayüz parçaları `layers/widgets/` altındadır.
+- Program ve ders bilgileri `layers/entities/` içinde tutulur.
+- Ortak başlıklar, dil sağlayıcısı ve genel sayfa durumları `layers/shared/` içinde bulunur.
+
+### Duyarlı ve erişilebilir arayüz
+
+Arayüz mobil ve masaüstü boyutlarında yeniden düzenlenir. Filtre alanı mobilde açılıp kapanabilir; tablolar küçük ekranlarda okunabilir biçimde sunulur. Form kontrolleri etiketlenir, etkileşimli öğelerin klavye odağı görünür tutulur ve sayfalarda ana içeriğe atlama bağlantısı vardır.
+
+### Tutarlı görsel dil
+
+Arayüz KTÜ’nün lacivert ve mavi tonlarını, yüksek kontrastlı içerik kartlarını ve Geom yazı tipini kullanır. Başlık, kart, tablo ve boş durum stilleri aynı görsel sistem içinde tutulur.
+
+---
+
+## Teknoloji yığını
+
+| Alan | Teknoloji |
+|---|---|
+| **Framework** | Next.js 16.3.6 |
+| **Arayüz kütüphanesi** | React 19 |
+| **Dil** | TypeScript 5 |
+| **Stil altyapısı** | Tailwind CSS 4 ve CSS Modules |
+| **Yönlendirme** | Next.js App Router |
+| **Lint** | ESLint 9 |
+| **Paket yöneticisi** | npm |
+| **Mimari** | Feature-Sliced Design yaklaşımı |
+
+---
+
+## Proje yapısı
+
+```text
+03-prototip/
+├── public/
+│   ├── brand/                    # KTÜ marka görseli
+│   └── fonts/                    # Geom yazı tipi ve lisans bilgisi
+├── src/
+│   ├── app/                      # Route’lar, layout ve global stiller
+│   └── layers/
+│       ├── pages/
+│       │   ├── catalog/
+│       │   ├── program-detail/
+│       │   ├── curriculum/
+│       │   └── course-detail/
+│       ├── widgets/
+│       │   ├── curriculum-selector/
+│       │   ├── outcome-matrix/
+│       │   └── weekly-content/
+│       ├── entities/
+│       │   ├── program/          # Program modeli ve tanıtım verileri
+│       │   └── course/           # Ders modeli, içerikleri ve müfredat
+│       └── shared/
+│           ├── providers/        # Dil sağlayıcısı
+│           └── ui/               # Ortak başlıklar ve sayfa durumları
+├── next.config.ts
+├── package.json
+├── package-lock.json
+└── tsconfig.json
+```
+
+`@/` import alias’ı `src/` dizinine karşılık gelir. Örnek: `@/layers/pages/catalog`.
+
+---
+
+## Uygulama rotaları
+
+| Rota | Açıklama |
+|---|---|
+| `/` | Program kataloğu, arama, filtreleme ve sıralama |
 | `/programlar/[id]` | Program tanıtımı ve müfredat seçimi |
-| `/programlar/[id]/ders-plani` | Seçilen sınıf ve dönemin ders listesi |
-| `/dersler/[code]` | Dersin kapsamlı bilgi paketi |
+| `/programlar/[id]/ders-plani` | Akademik yıl, sınıf ve döneme göre ders planı |
+| `/dersler/[code]` | Ders bilgi paketi |
 
-Ders planı ekranı `academicYear`, `year` ve `term` sorgu parametrelerini kullanır. Örnek: `/programlar/bilgisayar-muhendisligi/ders-plani?academicYear=2025-2026&year=1&term=fall`.
+Ders planı route’u `academicYear`, `year` ve `term` sorgu parametrelerini kabul eder:
 
-## Yerel ortamda çalıştırma
+```text
+/programlar/[id]/ders-plani?academicYear=2025-2026&year=1&term=fall
+```
 
-**Gereksinimler:** Node.js ve npm.
+`term` değeri `fall` veya `spring` olabilir. Geçersiz program, sınıf, dönem veya akademik yıl için bulunamadı sayfası gösterilir.
+
+---
+
+## Başlangıç
+
+### Gereksinimler
+
+- [Node.js](https://nodejs.org/) — güncel LTS sürümü önerilir
+- npm
+- Git
+
+### Depoyu klonla
 
 ```bash
 git clone https://github.com/emreucbudak/ktu-ders-bilgi-paketi.git
 cd ktu-ders-bilgi-paketi
+```
+
+### Bağımlılıkları yükle
+
+Kilit dosyasına göre kurulum:
+
+```bash
+npm ci
+```
+
+veya:
+
+```bash
 npm install
+```
+
+### Geliştirme sunucusunu başlat
+
+```bash
 npm run dev
 ```
 
-Tarayıcıda [http://localhost:3000](http://localhost:3000) adresini aç.
+Uygulama [http://localhost:3000](http://localhost:3000) adresinde açılır.
 
-| Komut | Ne yapar? |
-| --- | --- |
+### Üretim derlemesi
+
+```bash
+npm run build
+npm start
+```
+
+---
+
+## Kullanılabilir komutlar
+
+| Komut | Açıklama |
+|---|---|
 | `npm run dev` | Geliştirme sunucusunu başlatır |
-| `npm run lint` | ESLint denetimini çalıştırır |
-| `npm run build` | Üretim derlemesini oluşturur |
-| `npm start` | Üretim sunucusunu başlatır |
+| `npm run lint` | ESLint statik analizini çalıştırır |
+| `npm run build` | Optimize edilmiş üretim derlemesini oluşturur |
+| `npm start` | Üretim sunucusunu çalıştırır |
 
-## Mimari
+---
 
-Uygulama, Vettingo-Frontend’deki katmanlı **Feature-Sliced Design (FSD)** düzeni izlenerek yapılandırıldı. Next.js App Router dosyaları URL’leri ve sunucu tarafı parametreleri yönetir; sayfa arayüzleri `src/layers/pages` altında yaşar.
+## Veri ve kapsam notları
 
-```text
-src/
-├── app/                              # Route tanımları ve root layout
-└── layers/
-    ├── pages/                        # catalog, program-detail, curriculum, course-detail
-    ├── widgets/                      # Müfredat seçici, çıktı matrisi, haftalık içerik
-    ├── entities/
-    │   ├── program/                  # Program modeli ve tanıtım verileri
-    │   └── course/                   # Ders/müfredat modeli ve ders adı
-    └── shared/
-        ├── providers/                # Dil sağlayıcısı
-        └── ui/                       # Ortak başlıklar ve sayfa durumları
-```
-
-```text
-pages  →  widgets  →  entities
-   └──────────────→  shared
-```
-
-Her page slice’ı `index.ts` ile public API sunar. Böylece Next.js route dosyaları ekranı slice’ın iç dosyasına bağlanmadan çağırabilir.
-
-## Teknoloji yığını
-
-- [Next.js 16](https://nextjs.org/) · App Router ve sunucu tarafı sayfalar
-- [React 19](https://react.dev/) · Arayüz bileşenleri
-- [TypeScript](https://www.typescriptlang.org/) · Tip güvenli uygulama kodu
-- [Tailwind CSS 4](https://tailwindcss.com/) · Stil altyapısı
-- Feature-Sliced Design · Katmanlı kaynak düzeni
-
-## Proje kapsamı
-
-- Veriler prototip içinde tanımlıdır; backend veya öğrenci bilgi sistemi bağlantısı yoktur.
-- Örnek müfredat, ders içerikleri ve bazı İngilizce çeviriler temsili olabilir.
-- Dil tercihi `ktu_language` çerezi ile saklanır.
-- Kullanılan yazı tipinin lisans bilgisi [`public/fonts/OFL.txt`](./public/fonts/OFL.txt) dosyasındadır.
+- Bu depo frontend tasarım prototipidir; backend veya öğrenci bilgi sistemi entegrasyonu içermez.
+- Program, müfredat ve ders bilgileri proje içinde örnek veri olarak tanımlanmıştır.
+- İçerikler resmî, eksiksiz veya güncel akademik kayıt yerine geçmez.
+- İngilizce karşılığı bulunmayan bazı dersler Türkçe başlıkla gösterilir.
+- Dil tercihi `ktu_language` çereziyle saklanır.
+- Geom yazı tipi lisans bilgisi [`public/fonts/OFL.txt`](./public/fonts/OFL.txt) dosyasındadır.
 
 ---
 
 <div align="center">
-  <sub>İşyeri eğitimi kapsamında hazırlanmış bir KTÜ Ders Bilgi Paketi tasarım prototipi.</sub>
+
+**İşyeri eğitimi kapsamında hazırlanmış bir KTÜ Ders Bilgi Paketi tasarım prototipi.**
+
 </div>
