@@ -307,6 +307,11 @@
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{
  outline:2px solid #003B64;outline-offset:2px;box-shadow:0 0 0 5px #fff;
 }
+/* Keep keyboard focus visible without the dark halo on the catalog filters. */
+.filters .search:focus-within,.filters select:focus-visible{
+ outline:2px solid #007C91;outline-offset:2px;box-shadow:none;
+}
+.filters .search input:focus-visible{outline:none;box-shadow:none;}
 @media print{
  .intro,.intro h1,.intro p,.detail-code,.breadcrumbs{color:#163b53 !important;}
  .intro h1{-webkit-text-fill-color:#163b53 !important;print-color-adjust:exact;-webkit-print-color-adjust:exact;}
