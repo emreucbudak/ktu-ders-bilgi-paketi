@@ -28,11 +28,10 @@ export default function CourseDetail({course,program,year,term,academicYear}:{
    document.title=pageTitle;
  },[en,pageTitle]);
  const t=(tr:string,english:string)=>en?english:tr;
- const planUrl=`/programlar/${program.id.toLowerCase()}/ders-plani?academicYear=${academicYear}&year=${year}&term=${term}`;
  return <div className="site">
    <SiteHeader en={en} setEn={setEn}/>
    <main className="main curriculum-page">
-     <div className="detail-back"><Link className="back-link" href={planUrl}><span className="back-arrow" aria-hidden="true">←</span>{t("Ders planına dön","Back to curriculum")}</Link></div>
+      <div className="detail-back"><Link className="back-link" href={`/programlar/${program.id.toLowerCase()}#curriculum-title`}><span className="back-arrow" aria-hidden="true">←</span>{t("Geri dön","Go back")}</Link></div>
      <nav className="breadcrumbs" aria-label={t("Sayfa yolu","Breadcrumb")}><Link href="/"> {t("Programlar","Programs")}</Link><span>/</span><Link href={`/programlar/${program.id.toLowerCase()}`}>{t(program.tr,program.en)}</Link><span>/</span><span aria-current="page">{course.code}</span></nav>
      <section className="intro detail-intro"><div><div className="eyebrow">{t("DERS BİLGİLERİ","COURSE INFORMATION")}</div><h1 lang={en&&!course.en?"tr":undefined}>{getCourseTitle(course,en)}</h1><p>{academicYear} · {t(`${year}. sınıf`,`Year ${year}`)} · {term==="fall"?t("Güz","Fall"):t("Bahar","Spring")}</p></div><span className="detail-code">{course.code}</span></section>
      {en&&!course.en&&<p className="course-alert" role="note">English translation unavailable. The original Turkish course title is shown.</p>}

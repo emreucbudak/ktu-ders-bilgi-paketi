@@ -254,13 +254,6 @@
 .course-alert{background:#fff6df;color:#543b12;border:1px solid #d7b971;border-radius:6px;padding:16px 20px;line-height:1.7;margin:0 0 20px}
 .curriculum-table td,.detail-intro h1{overflow-wrap:anywhere}
 .detail-intro>div{min-width:0}
-.state-page{max-width:800px;margin:60px auto;padding:32px;background:white;border-radius:10px;color:var(--ink);width:calc(100% - 40px)}
-.state-page h1{font-size:30px;letter-spacing:0;line-height:1.3}
-.state-page p{line-height:1.8}
-.state-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:24px;align-items:center}
-.state-actions button,.state-actions a{padding:12px 18px;border:1px solid var(--blue);border-radius:6px;color:var(--blue);background:white}
-.state-skeleton{display:grid;gap:14px;margin-top:24px}
-.state-skeleton span{display:block;height:32px;border-radius:4px;background:#e4edf3}
 
 .program-contact{border-top:1px solid var(--line);margin-top:34px;padding-top:30px}
 .program-contact h2{font-size:25px;margin:0 0 24px}
@@ -357,3 +350,17 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,su
 
 
 
+.route-loading{min-height:100vh;background:var(--blue)}
+.loading-header{height:108px;background:#fff;display:flex;align-items:center;padding:0 max(5vw,24px);gap:28px}
+.loading-bar{display:block;border-radius:6px;background:linear-gradient(100deg,#e7edf1 25%,#f5f8fa 42%,#e7edf1 60%);background-size:240% 100%;animation:loading-shimmer 1.35s ease-in-out infinite}
+.loading-logo{width:248px;height:40px}.loading-header-label{width:210px;height:30px}.loading-language{width:78px;height:38px;margin-left:auto}
+.loading-catalog-intro{padding:54px 0 46px;min-height:225px}.loading-eyebrow{width:215px;height:12px;margin-bottom:25px}.loading-title{width:min(500px,80%);height:48px;margin-bottom:16px}.loading-copy{width:min(440px,85%);height:15px}
+.loading-catalog-layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:32px;align-items:start;padding-bottom:50px}
+.loading-filter-card{background:#fff;border-radius:10px;padding:25px 24px 0;overflow:hidden}.loading-filter-title{width:70%;height:20px;margin-bottom:26px}.loading-field{height:44px;margin:0 0 24px}.loading-sidebar-foot{height:78px;margin:0 -24px}
+.loading-results{border-left:1px solid #376d8e;padding-left:32px;min-width:0}.loading-results-title{width:55%;height:28px;margin:5px 0 23px}.loading-program-card{display:flex;gap:18px;background:#fff;border-radius:8px;padding:24px;margin-bottom:12px}.loading-card-icon{width:44px;height:44px;flex:none}.loading-program-card>div{flex:1}.loading-faculty{width:32%;height:11px;margin:1px 0 12px}.loading-card-title{width:70%;height:20px;margin-bottom:15px}.loading-card-meta{width:55%;height:14px;margin-bottom:17px}.loading-card-link{width:130px;height:14px}
+.loading-back-link{width:105px;height:18px;margin:26px 0 20px}.loading-breadcrumbs{width:42%;height:13px;margin-bottom:28px}.loading-detail-intro{color:#fff;min-height:175px;padding:20px 0 38px;display:flex;justify-content:space-between;align-items:center;gap:24px}.loading-detail-title{width:min(660px,70vw);height:42px;margin:18px 0 14px}.loading-detail-code{width:90px;height:42px;flex:none}.loading-detail-sheet{background:#fff;border-radius:10px;padding:32px;margin-bottom:48px}.loading-section-title{width:220px;height:25px;margin-bottom:24px}.loading-info-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}.loading-info-cell{height:92px;border-radius:0;background-color:#fff}.loading-lower-title{margin:36px 0 20px}.loading-paragraph{height:15px;margin:0 0 13px}.loading-paragraph:nth-of-type(3n){width:82%}.loading-career-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.loading-career-card{height:200px}.loading-curriculum-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.loading-curriculum-action{width:210px;height:50px;margin-top:22px}.loading-table{border:1px solid var(--line);margin-bottom:22px}.loading-table-row{height:54px;border-radius:0;border-bottom:1px solid var(--line)}
+.route-message{max-width:800px;margin:60px auto;padding:32px;background:#fff;border-radius:10px;color:var(--ink);width:calc(100% - 40px)}.route-message h1{font-size:30px;letter-spacing:0;line-height:1.3}.route-message p{line-height:1.8}.route-message>div{display:flex;flex-wrap:wrap;gap:16px;margin-top:24px;align-items:center}.route-message button,.route-message a{padding:12px 18px;border:1px solid var(--blue);border-radius:6px;color:var(--blue);background:#fff;text-decoration:none}
+@keyframes loading-shimmer{to{background-position-x:-240%}}
+@media(prefers-reduced-motion:reduce){.loading-bar{animation:none;background:#e7edf1}}
+@media(max-width:768px){.loading-catalog-layout{grid-template-columns:1fr}.loading-filter-card{display:none}.loading-results{border:0;padding:0}.loading-info-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.loading-career-grid{grid-template-columns:1fr}}
+@media(max-width:650px){.loading-header{height:82px}.loading-logo{width:150px;height:32px}.loading-header-label{display:none}.loading-catalog-intro{padding:40px 0 32px;min-height:190px}.loading-title{height:38px}.loading-detail-intro{min-height:150px}.loading-detail-title{height:34px}.loading-detail-sheet{padding:22px 16px}.loading-info-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.loading-curriculum-fields{grid-template-columns:1fr;gap:12px}.loading-career-card{height:170px}.loading-program-card{padding:18px;gap:12px}.loading-card-meta{width:85%}.route-message{margin:30px auto;padding:24px}}
