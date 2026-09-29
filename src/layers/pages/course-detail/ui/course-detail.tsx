@@ -5,6 +5,7 @@ import {useLanguage} from "@/layers/shared/providers/language-provider";
 import SiteHeader from "@/layers/shared/ui/site-header";
 import OutcomeMatrix from "@/layers/widgets/outcome-matrix/ui/outcome-matrix";
 import WeeklyContent from "@/layers/widgets/weekly-content/ui/weekly-content";
+import CourseNavbar from "@/layers/widgets/course-navbar/ui/course-navbar";
 import programs from "@/layers/entities/program/model/programs";
 import { getSampleCourses, getCourseTitle } from "@/layers/entities/course/model/curriculum";
 import { getCourseAim } from "@/layers/entities/course/model/course-aims";
@@ -31,13 +32,14 @@ export default function CourseDetail({course,program,year,term,academicYear}:{
  return <div className="site">
    <SiteHeader en={en} setEn={setEn}/>
    <main className="main curriculum-page">
-      <div className="detail-back"><Link className="back-link" href={`/programlar/${program.id.toLowerCase()}#curriculum-title`}><span className="back-arrow" aria-hidden="true">←</span>{t("Geri dön","Go back")}</Link></div>
      <nav className="breadcrumbs" aria-label={t("Sayfa yolu","Breadcrumb")}><Link href="/"> {t("Programlar","Programs")}</Link><span>/</span><Link href={`/programlar/${program.id.toLowerCase()}`}>{t(program.tr,program.en)}</Link><span>/</span><span aria-current="page">{course.code}</span></nav>
      <section className="intro detail-intro"><div><div className="eyebrow">{t("DERS BİLGİLERİ","COURSE INFORMATION")}</div><h1 lang={en&&!course.en?"tr":undefined}>{getCourseTitle(course,en)}</h1><p>{academicYear} · {t(`${year}. sınıf`,`Year ${year}`)} · {term==="fall"?t("Güz","Fall"):t("Bahar","Spring")}</p></div><span className="detail-code">{course.code}</span></section>
      {en&&!course.en&&<p className="course-alert" role="note">English translation unavailable. The original Turkish course title is shown.</p>}
      {course.status==="closed"&&<p className="course-alert" role="note">{t("Bu ders seçilen dönemde açılmıyor. İçerik bilgileri inceleme amacıyla gösterilmektedir; ders dönem toplamına dahil değildir.","This course is not offered this semester. Its content remains available for reference and it is excluded from semester totals.")}</p>}
      {course.ects===0&&<p className="course-alert" role="note">{t("Bu ders kredisizdir (0 AKTS). Çalışma saatleri bilgi amaçlı gösterilir ve AKTS'ye dönüştürülmez.","This is a non-credit course (0 ECTS). Workload hours are informational and are not converted to ECTS.")}</p>}
-     <section className="detail-sheet" aria-label={t("Ders bilgileri", "Course information")}>
+     <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-4 xl:gap-6">
+       <CourseNavbar en={en}/>
+       <section id="course-information" className="detail-sheet min-w-0 xl:col-span-3" aria-label={t("Ders bilgileri", "Course information")}>
        
        <dl className="detail-grid course-info-grid">
          {[[t("Öğretim üyesi","Instructor"),t("Dr. Deniz Örnek","Dr. Deniz Örnek")],[t("Ders dili","Course language"),program.language === 2 ? t("İngilizce","English") : t("Türkçe","Turkish")],[t("Ders kodu","Course code"),course.code],[t("Kredi","Credit"),String(course.credit)],[t("AKTS","ECTS"),String(course.ects)],[t("Ders türü","Course type"),course.elective?t("Seçmeli","Elective"):t("Zorunlu","Required")],[t("Teori (saat/hafta)","Theory (hours/week)"),String(course.theoryHours)],[t("Uygulama (saat/hafta)","Practice (hours/week)"),String(course.practiceHours)],[t("Toplam (saat/hafta)","Total (hours/week)"),String(course.theoryHours+course.practiceHours)],[t("Program","Program"),t(program.tr,program.en)],[t("Eğitim-öğretim yılı","Academic year"),academicYear],[t("Dönem / Yarıyıl","Term / Semester"),(term==="fall"?t("Güz","Fall"):t("Bahar","Spring")) + " / " + ((year-1)*2+(term==="fall"?1:2)) + t(". yarıyıl"," semester")]].map(([label,value])=><div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
@@ -94,20 +96,8 @@ export default function CourseDetail({course,program,year,term,academicYear}:{
          </table>
        </section>
        <WeeklyContent key={course.code} title={course.contentTitle} en={en} />
-     </section>
+       </section>
+     </div>
    </main>
  </div>;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

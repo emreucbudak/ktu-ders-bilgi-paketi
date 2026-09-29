@@ -11,6 +11,7 @@ import programAims from "@/layers/entities/program/model/program-aims";
 import programOutcomes from "@/layers/entities/program/model/program-outcomes";
 import programCareers from "@/layers/entities/program/model/program-careers";
 import CurriculumSelector from "@/layers/widgets/curriculum-selector/ui/curriculum-selector";
+import ProgramsNavbar from "@/layers/widgets/programs-navbar/ui/programs-navbar";
 
 export default function ProgramDetail({ program: p }: { program: typeof programs[number] }) {
   const [en, setEn] = useLanguage();
@@ -26,10 +27,11 @@ export default function ProgramDetail({ program: p }: { program: typeof programs
   return <div className="site">
     <SiteHeader en={en} setEn={setEn} />
     <main className="main detail-main">
-      <div className="detail-back"><Link className="back-link" href="/"><span className="back-arrow" aria-hidden="true">←</span>{t("Geri dön", "Go back")}</Link></div>
       <nav className="breadcrumbs" aria-label={t("Sayfa yolu", "Breadcrumb")}><Link href="/">{t("Programlar", "Programs")}</Link><span aria-hidden="true">/</span><span aria-current="page">{en ? p.en : p.tr}</span></nav>
       <section className="intro detail-intro"><div><div className="eyebrow">{faculty}</div><h1>{en ? p.en : p.tr}</h1><p>{degree} · {language}</p></div><span className="detail-code">{p.id}</span></section>
-      <section className="detail-sheet" aria-labelledby="overview">
+      <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-4 xl:gap-6">
+        <ProgramsNavbar/>
+        <section className="detail-sheet min-w-0 xl:col-span-3" aria-labelledby="overview">
         <div className="detail-sheet-heading"><h2 id="overview">{t("Program hakkında", "About the program")}</h2><span>{t("Örnek katalog", "Sample catalog")}</span></div>
         <p className="detail-lead">{t(programHistory[p.id].tr, programHistory[p.id].en)}{" "}{t(programDescriptions[p.id].tr, programDescriptions[p.id].en)}{" "}{t(`${p.tr} programı ${p.years} yıl ve ${p.years * 2} yarıyıldan oluşur. Programın toplam kredi yükü ${p.ects} AKTS’dir.`, `The ${p.en} program consists of ${p.years * 2} semesters over ${p.years} years, with a total of ${p.ects} ECTS credits.`)}</p>
         <dl className="detail-grid">
@@ -84,21 +86,8 @@ export default function ProgramDetail({ program: p }: { program: typeof programs
           </dl>
         </section>
       </section>
+
+      </div>
     </main>
   </div>;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -71,7 +71,7 @@ export default function Home() {
             <div className="program-icon"><Icon type="book"/></div>
             <div className="program-content"><div className="faculty-name">{faculties[p.faculty]}</div><h3>{en ? p.en : p.tr}</h3>
               <div className="program-meta"><span className="degree-badge">{degrees[p.degree]}</span><span>{languages[p.language]}</span><span>{p.years} {t("yıl", "years")}</span><span>{p.ects} {t("AKTS", "ECTS")}</span></div>
-              <Link className="program-link" href={`/programlar/${p.id.toLowerCase()}`}>{t("Programı incele", "Explore program")}<Icon type="arrow"/></Link>
+              <Link className="program-link" target="_self"   href={`/programlar/${p.id.toLowerCase()}`}>{t("Programı incele", "Explore program")}<Icon type="arrow"/></Link>
             </div>
           </article>)}</div>
           {results.length > pageSize && <nav className={styles.pagination} aria-label={t("Program sayfaları", "Program pages")}>

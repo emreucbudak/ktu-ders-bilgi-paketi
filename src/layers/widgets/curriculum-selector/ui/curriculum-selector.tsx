@@ -25,7 +25,7 @@ export default function CurriculumSelector({ id, years, en }: { id: string; year
        <caption className="sr-only">{t("Seçilen dönemin örnek ders planı", "Sample curriculum for the selected semester")}</caption>
        <thead><tr>{[t("Ders kodu","Code"),t("Ders adı","Course"),t("Tür","Type"),t("Kredi","Credit"),t("AKTS","ECTS")].map(label=><th scope="col" key={label}>{label}</th>)}</tr></thead>
        <tbody>{courses.map(course=><tr key={course.code}>
-         <td data-label={t("Kod","Code")}><Link className="course-link" href={`/dersler/${course.code}?academicYear=${academicYear}`}>{course.code}</Link></td>
+         <td data-label={t("Kod","Code")}><Link className="course-link" target="_self" href={`/dersler/${course.code}?academicYear=${academicYear}`}>{course.code}</Link></td>
          <td data-label={t("Ders","Course")}>{<CourseName course={course} en={en}/>}</td>
          <td data-label={t("Tür","Type")}>{course.elective?t("Seçmeli","Elective"):t("Zorunlu","Required")}</td>
          <td data-label={t("Kredi","Credit")}>{course.credit}</td>
