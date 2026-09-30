@@ -2,12 +2,12 @@ import DetailSection from "@/layers/shared/ui/detail-section";
 import programOutcomes from "@/layers/entities/program/model/program-outcomes";
 import {getCourseOutcomes} from "@/layers/entities/course/model/course-outcomes";
 import {getOutcomeContributions} from "@/layers/entities/course/model/outcome-matrix";
-export default function OutcomeMatrix({programId,title,en}:{programId:string;title:string;en:boolean}){
+export default function OutcomeMatrix({programId,title,en,onSectionEnter}:{programId:string;title:string;en:boolean;onSectionEnter:(id:string)=>void}){
  const t=(tr:string,english:string)=>en?english:tr;
  const outcomes=getCourseOutcomes(title),program=programOutcomes[programId];
  const values=getOutcomeContributions(outcomes.length,program.length);
  const po=t("PK","PO"),co=t("DK","CO");
- return <DetailSection sectionId="matrix-title" className="course-table-section outcome-matrix" aria-labelledby="matrix-title">
+ return <DetailSection onSectionEnter={onSectionEnter} sectionId="matrix-title" className="course-table-section outcome-matrix" aria-labelledby="matrix-title">
   <h2 id="matrix-title">{t("Ders ve program kazanımları ilişkisi","Course and program outcomes mapping")}</h2>
   <p className="outcomes-intro" id="matrix-scale">{t("Katkı düzeyi: 0 — Yok · 1 — Düşük · 2 — Orta · 3 — Yüksek","Contribution: 0 — None · 1 — Low · 2 — Moderate · 3 — High")}</p>
   <table className="outcome-table" aria-describedby="matrix-scale">
