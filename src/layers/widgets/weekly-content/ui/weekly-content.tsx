@@ -1,3 +1,4 @@
+import DetailSection from "@/layers/shared/ui/detail-section";
 import { getWeeklyContent } from "@/layers/entities/course/model/course-weekly";
 
 export default function WeeklyContent({ title, en }: { title: string; en: boolean }) {
@@ -5,7 +6,7 @@ export default function WeeklyContent({ title, en }: { title: string; en: boolea
     const t = (tr: string, english: string) => en ? english : tr;
 
     return (
-        <section className="course-table-section weekly-content" aria-labelledby="weekly-topics-title">
+        <DetailSection sectionId="weekly-topics-title" className="course-table-section weekly-content" aria-labelledby="weekly-topics-title">
             <h2 id="weekly-topics-title">{t("Haftalık konular", "Weekly topics")}</h2>
             <table className="weekly-table">
                 <caption className="sr-only">{t("Haftalık ders içeriği", "Weekly course content")}</caption>
@@ -28,6 +29,6 @@ export default function WeeklyContent({ title, en }: { title: string; en: boolea
                     ))}
                 </tbody>
             </table>
-        </section>
+        </DetailSection>
     );
 }
