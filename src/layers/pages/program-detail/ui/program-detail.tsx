@@ -17,7 +17,7 @@ import ProgramsNavbar from "@/layers/widgets/programs-navbar/ui/programs-navbar"
 
 export default function ProgramDetail({ program: p }: { program: typeof programs[number] }) {
   const [en, setEn] = useLanguage();
-  const { activeSection, activateSection } = useProgramsNavbar();
+  const { activeTabId, activateSection } = useProgramsNavbar();
   useEffect(() => { document.documentElement.lang = en ? "en" : "tr"; document.title=`${en?p.en:p.tr} | KTÜ Ders Kataloğu`; }, [en,p.en,p.tr]);
   const t = (tr: string, english: string) => en ? english : tr;
   const faculty = (en ? ["Faculty of Engineering", "Faculty of Architecture", "Faculty of Science", "Graduate School of Natural Sciences", "Faculty of Health Sciences", "Faculty of Economics and Administrative Sciences", "Faculty of Forestry", "Vocational School", "Faculty of Marine Sciences"] : ["Mühendislik Fakültesi", "Mimarlık Fakültesi", "Fen Fakültesi", "Fen Bilimleri Enstitüsü", "Sağlık Bilimleri Fakültesi", "İktisadi ve İdari Bilimler Fakültesi", "Orman Fakültesi", "Meslek Yüksekokulu", "Deniz Bilimleri Fakültesi"])[p.faculty];
@@ -33,7 +33,7 @@ export default function ProgramDetail({ program: p }: { program: typeof programs
       <nav className="breadcrumbs" aria-label={t("Sayfa yolu", "Breadcrumb")}><Link href="/">{t("Programlar", "Programs")}</Link><span aria-hidden="true">/</span><span aria-current="page">{en ? p.en : p.tr}</span></nav>
       <section className="intro detail-intro"><div><div className="eyebrow">{faculty}</div><h1>{en ? p.en : p.tr}</h1><p>{degree} · {language}</p></div><span className="detail-code">{p.id}</span></section>
       <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-4 xl:gap-6">
-        <ProgramsNavbar activeSection={activeSection} onSectionChange={activateSection}/>
+        <ProgramsNavbar activeTabId={activeTabId} onSectionChange={activateSection}/>
         <section className="detail-sheet min-w-0 xl:col-span-3" aria-labelledby="overview">
         <DetailSection onSectionEnter={activateSection} sectionId="overview" aria-labelledby="overview">
         <div className="detail-sheet-heading"><h2 id="overview">{t("Program hakkında", "About the program")}</h2><span>{t("Örnek katalog", "Sample catalog")}</span></div>
