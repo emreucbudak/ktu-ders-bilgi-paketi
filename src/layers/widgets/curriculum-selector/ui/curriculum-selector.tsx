@@ -6,14 +6,14 @@ import { getCourseWorkload } from "@/layers/entities/course/model/course-assessm
 import CourseName from "@/layers/entities/course/ui/course-name";
 import { useState } from "react";
 import { academicYears, getSampleCourses } from "@/layers/entities/course/model/curriculum";
-export default function CurriculumSelector({ id, years, en }: { id: string; years: number; en: boolean }) {
+export default function CurriculumSelector({ id, years, en, onSectionEnter }: { id: string; years: number; en: boolean; onSectionEnter: (id: string) => void }) {
  const [academicYear,setAcademicYear]=useState(academicYears[0]);
  const [studyYear,setStudyYear]=useState("1");
  const [term,setTerm]=useState("fall");
  const t=(tr:string,english:string)=>en?english:tr;
  const courses=getSampleCourses(id,Number(studyYear),term);
  const totalWorkload=courses.filter(c=>c.status!=="closed").reduce((sum,c)=>sum+getCourseWorkload(c.theoryHours,c.practiceHours,c.ects).reduce((hours,row)=>hours+row.count*row.hours,0),0);
- return <DetailSection sectionId="curriculum-title" className="curriculum-selector" aria-labelledby="curriculum-title">
+ return <DetailSection onSectionEnter={onSectionEnter} sectionId="curriculum-title" className="curriculum-selector" aria-labelledby="curriculum-title">
    <h2 id="curriculum-title">{t("Ders planı","Curriculum")}</h2>
    <div className="curriculum-fields">
      <label htmlFor="academic-year">{t("Eğitim-öğretim yılı","Academic year")}<select id="academic-year" value={academicYear} onChange={e=>setAcademicYear(e.target.value)}>{academicYears.map(y=><option key={y}>{y}</option>)}</select></label>

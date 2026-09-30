@@ -1,4 +1,5 @@
 "use client";
+import { useCourseNavbar } from "@/layers/widgets/course-navbar/model/use-course-navbar";
 import DetailSection from "@/layers/shared/ui/detail-section";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -19,6 +20,7 @@ export default function CourseDetail({course,program,year,term,academicYear}:{
  course:ReturnType<typeof getSampleCourses>[number];program:typeof programs[number];year:number;term:string;academicYear:string;
 }){
  const [en,setEn]=useLanguage();
+  const { activeSection, activateSection } = useCourseNavbar();
  const aim=getCourseAim(course.contentTitle);
  const workload=getCourseWorkload(course.theoryHours,course.practiceHours,course.ects);
  const totalHours=workload.reduce((sum,row)=>sum+row.count*row.hours,0);
@@ -39,23 +41,23 @@ export default function CourseDetail({course,program,year,term,academicYear}:{
      {course.status==="closed"&&<p className="course-alert" role="note">{t("Bu ders seçilen dönemde açılmıyor. İçerik bilgileri inceleme amacıyla gösterilmektedir; ders dönem toplamına dahil değildir.","This course is not offered this semester. Its content remains available for reference and it is excluded from semester totals.")}</p>}
      {course.ects===0&&<p className="course-alert" role="note">{t("Bu ders kredisizdir (0 AKTS). Çalışma saatleri bilgi amaçlı gösterilir ve AKTS'ye dönüştürülmez.","This is a non-credit course (0 ECTS). Workload hours are informational and are not converted to ECTS.")}</p>}
      <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-4 xl:gap-6">
-       <CourseNavbar en={en}/>
+       <CourseNavbar en={en} activeSection={activeSection} onSectionChange={activateSection}/>
        <section className="detail-sheet min-w-0 xl:col-span-3" aria-label={t("Ders bilgileri", "Course information")}>
        
-       <DetailSection sectionId="course-information" aria-label={t("Ders bilgileri", "Course information")}>
+       <DetailSection onSectionEnter={activateSection} sectionId="course-information" aria-label={t("Ders bilgileri", "Course information")}>
        <dl id="course-information" className="detail-grid course-info-grid">
          {[[t("Öğretim üyesi","Instructor"),t("Dr. Deniz Örnek","Dr. Deniz Örnek")],[t("Ders dili","Course language"),program.language === 2 ? t("İngilizce","English") : t("Türkçe","Turkish")],[t("Ders kodu","Course code"),course.code],[t("Kredi","Credit"),String(course.credit)],[t("AKTS","ECTS"),String(course.ects)],[t("Ders türü","Course type"),course.elective?t("Seçmeli","Elective"):t("Zorunlu","Required")],[t("Teori (saat/hafta)","Theory (hours/week)"),String(course.theoryHours)],[t("Uygulama (saat/hafta)","Practice (hours/week)"),String(course.practiceHours)],[t("Toplam (saat/hafta)","Total (hours/week)"),String(course.theoryHours+course.practiceHours)],[t("Program","Program"),t(program.tr,program.en)],[t("Eğitim-öğretim yılı","Academic year"),academicYear],[t("Dönem / Yarıyıl","Term / Semester"),(term==="fall"?t("Güz","Fall"):t("Bahar","Spring")) + " / " + ((year-1)*2+(term==="fall"?1:2)) + t(". yarıyıl"," semester")]].map(([label,value])=><div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
        </dl>
        </DetailSection>
-       <DetailSection sectionId="course-aim-title" className="program-aim" aria-labelledby="course-aim-title"><h2 id="course-aim-title">{t("Dersin amacı","Course aim")}</h2><p>{t(aim.tr,aim.en)}</p></DetailSection>
-       <DetailSection sectionId="prerequisites-title" className="course-prerequisites" aria-labelledby="prerequisites-title">
+       <DetailSection onSectionEnter={activateSection} sectionId="course-aim-title" className="program-aim" aria-labelledby="course-aim-title"><h2 id="course-aim-title">{t("Dersin amacı","Course aim")}</h2><p>{t(aim.tr,aim.en)}</p></DetailSection>
+       <DetailSection onSectionEnter={activateSection} sectionId="prerequisites-title" className="course-prerequisites" aria-labelledby="prerequisites-title">
          <h2 id="prerequisites-title">{t("Ön koşullar", "Prerequisites")}</h2>
          {prerequisites.length ? <>
            <p>{t("Bu dersten önce aşağıdaki derslerin başarıyla tamamlanması gerekir.", "The following courses must be successfully completed before taking this course.")}</p>
            <ul>{prerequisites.map(required => <li key={required.code}><Link className="course-link" href={`/dersler/${required.code}?academicYear=${academicYear}`}>{required.code} — {t(required.tr,required.en)}</Link></li>)}</ul>
          </> : <p>{t("Yok. Bu ders için ön koşul dersi bulunmamaktadır.", "None. This course has no prerequisite courses.")}</p>}
        </DetailSection>
-       <DetailSection sectionId="textbook-title" className="course-resources" aria-labelledby="textbook-title">
+       <DetailSection onSectionEnter={activateSection} sectionId="textbook-title" className="course-resources" aria-labelledby="textbook-title">
          <h2 id="textbook-title">{t("Ders kitabı","Textbook")}</h2>
          <div className="resource-entry">
            <span className="resource-title">{resources.textbook.title}</span>
@@ -67,14 +69,14 @@ export default function CourseDetail({course,program,year,term,academicYear}:{
            <p>{resource.author}</p>
          </li>)}</ul>
        </DetailSection>
-       <DetailSection sectionId="course-outcomes-title" className="program-outcomes" aria-labelledby="course-outcomes-title">
+       <DetailSection onSectionEnter={activateSection} sectionId="course-outcomes-title" className="program-outcomes" aria-labelledby="course-outcomes-title">
          <h2 id="course-outcomes-title">{t("Öğrenme kazanımları","Learning outcomes")}</h2>
          <p className="outcomes-intro">{t("Bu dersi başarıyla tamamlayan öğrenciler:","Students who successfully complete this course can:")}</p>
          <ol>{getCourseOutcomes(course.contentTitle).map(([tr,english]) => <li key={tr}>{t(tr,english)}</li>)}</ol>
        </DetailSection>
 
-       <OutcomeMatrix programId={program.id} title={course.contentTitle} en={en}/>
-       <DetailSection sectionId="workload-title" className="course-table-section" aria-labelledby="workload-title">
+       <OutcomeMatrix onSectionEnter={activateSection} programId={program.id} title={course.contentTitle} en={en}/>
+       <DetailSection onSectionEnter={activateSection} sectionId="workload-title" className="course-table-section" aria-labelledby="workload-title">
          <h2 id="workload-title">{t("AKTS iş yükü","ECTS workload")}</h2>
          <table className="curriculum-table course-data-table">
            <caption className="sr-only">{t("Dersin etkinlik bazında iş yükü","Course workload by activity")}</caption>
@@ -89,7 +91,7 @@ export default function CourseDetail({course,program,year,term,academicYear}:{
          </table>
          {course.ects>0&&<p className="ects-calculation">{t("AKTS hesabı","ECTS calculation")}: {totalHours} {t("saat","hours")} ÷ 30 = <strong>{course.ects} AKTS / ECTS</strong></p>}
        </DetailSection>
-       <DetailSection sectionId="assessment-title" className="course-table-section" aria-labelledby="assessment-title">
+       <DetailSection onSectionEnter={activateSection} sectionId="assessment-title" className="course-table-section" aria-labelledby="assessment-title">
          <h2 id="assessment-title">{t("Değerlendirme tablosu","Assessment")}</h2>
          <table className="curriculum-table course-data-table">
            <caption className="sr-only">{t("Değerlendirme etkinlikleri ve başarı notuna katkıları","Assessment activities and contributions to the final grade")}</caption>
@@ -98,7 +100,7 @@ export default function CourseDetail({course,program,year,term,academicYear}:{
            <tfoot><tr><th scope="row" colSpan={2}>{t("Toplam","Total")}</th><td>%{courseAssessment.reduce((sum,row)=>sum+row.weight,0)}</td></tr></tfoot>
          </table>
        </DetailSection>
-       <WeeklyContent key={course.code} title={course.contentTitle} en={en} />
+       <WeeklyContent onSectionEnter={activateSection} key={course.code} title={course.contentTitle} en={en} />
        </section>
      </div>
    </main>
