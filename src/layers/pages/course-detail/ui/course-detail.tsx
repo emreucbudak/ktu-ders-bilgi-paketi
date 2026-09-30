@@ -20,7 +20,7 @@ export default function CourseDetail({course,program,year,term,academicYear}:{
  course:ReturnType<typeof getSampleCourses>[number];program:typeof programs[number];year:number;term:string;academicYear:string;
 }){
  const [en,setEn]=useLanguage();
-  const { activeSection, activateSection } = useCourseNavbar();
+  const { activeTabId, activateSection } = useCourseNavbar();
  const aim=getCourseAim(course.contentTitle);
  const workload=getCourseWorkload(course.theoryHours,course.practiceHours,course.ects);
  const totalHours=workload.reduce((sum,row)=>sum+row.count*row.hours,0);
@@ -41,7 +41,7 @@ export default function CourseDetail({course,program,year,term,academicYear}:{
      {course.status==="closed"&&<p className="course-alert" role="note">{t("Bu ders seçilen dönemde açılmıyor. İçerik bilgileri inceleme amacıyla gösterilmektedir; ders dönem toplamına dahil değildir.","This course is not offered this semester. Its content remains available for reference and it is excluded from semester totals.")}</p>}
      {course.ects===0&&<p className="course-alert" role="note">{t("Bu ders kredisizdir (0 AKTS). Çalışma saatleri bilgi amaçlı gösterilir ve AKTS'ye dönüştürülmez.","This is a non-credit course (0 ECTS). Workload hours are informational and are not converted to ECTS.")}</p>}
      <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-4 xl:gap-6">
-       <CourseNavbar en={en} activeSection={activeSection} onSectionChange={activateSection}/>
+       <CourseNavbar en={en} activeTabId={activeTabId} onSectionChange={activateSection}/>
        <section className="detail-sheet min-w-0 xl:col-span-3" aria-label={t("Ders bilgileri", "Course information")}>
        
        <DetailSection onSectionEnter={activateSection} sectionId="course-information" aria-label={t("Ders bilgileri", "Course information")}>
