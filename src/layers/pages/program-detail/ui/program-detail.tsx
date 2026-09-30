@@ -1,4 +1,5 @@
 "use client";
+import DetailSection from "@/layers/shared/ui/detail-section";
 import {useLanguage} from "@/layers/shared/providers/language-provider";
 import SiteHeader from "@/layers/shared/ui/site-header";
 import Link from "next/link";
@@ -32,33 +33,35 @@ export default function ProgramDetail({ program: p }: { program: typeof programs
       <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-4 xl:gap-6">
         <ProgramsNavbar/>
         <section className="detail-sheet min-w-0 xl:col-span-3" aria-labelledby="overview">
+        <DetailSection sectionId="overview" aria-labelledby="overview">
         <div className="detail-sheet-heading"><h2 id="overview">{t("Program hakkında", "About the program")}</h2><span>{t("Örnek katalog", "Sample catalog")}</span></div>
         <p className="detail-lead">{t(programHistory[p.id].tr, programHistory[p.id].en)}{" "}{t(programDescriptions[p.id].tr, programDescriptions[p.id].en)}{" "}{t(`${p.tr} programı ${p.years} yıl ve ${p.years * 2} yarıyıldan oluşur. Programın toplam kredi yükü ${p.ects} AKTS’dir.`, `The ${p.en} program consists of ${p.years * 2} semesters over ${p.years} years, with a total of ${p.ects} ECTS credits.`)}</p>
         <dl className="detail-grid">
           {[[t("Akademik birim", "Academic unit"),faculty],[t("Öğrenim düzeyi", "Degree level"),degree],[t("Öğretim dili", "Language of instruction"),language],[t("Program süresi", "Duration"),t(`${p.years} yıl / ${p.years * 2} yarıyıl`, `${p.years} years / ${p.years * 2} semesters`)],[t("Toplam AKTS", "Total ECTS"),String(p.ects)],[t("Program kodu", "Program code"),p.id],[t("Eğitim şekli", "Mode of delivery"),t("Yüz yüze", "On campus")],[t("Öğrenim türü", "Study mode"),t("Tam zamanlı", "Full-time")],[t("Verilen derece", "Awarded qualification"),qualification],[t("Toplam yarıyıl", "Total semesters"),String(p.years * 2)],[t("Yıllık AKTS yükü", "Annual ECTS load"),String(p.ects / p.years)],[t("Yeterlilik düzeyi", "Qualification level"),t(`TYYÇ ${qualificationLevel}. düzey`, `TQF-HE Level ${qualificationLevel}`)]].map(([label,value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
         </dl>
-        <section className="program-aim" aria-labelledby="program-aim-title"><h2 id="program-aim-title">{t("Programın amacı", "Program aim")}</h2><p>{t(programAims[p.id].tr, programAims[p.id].en)}</p></section>
-        <section className="program-outcomes" aria-labelledby="outcomes-title">
+        </DetailSection>
+        <DetailSection sectionId="program-aim-title" className="program-aim" aria-labelledby="program-aim-title"><h2 id="program-aim-title">{t("Programın amacı", "Program aim")}</h2><p>{t(programAims[p.id].tr, programAims[p.id].en)}</p></DetailSection>
+        <DetailSection sectionId="outcomes-title" className="program-outcomes" aria-labelledby="outcomes-title">
           <h2 id="outcomes-title">{t("Program öğrenme kazanımları", "Program learning outcomes")}</h2>
           <p className="outcomes-intro">{t("Bu programı tamamlayan mezunlar:", "Graduates of this program can:")}</p>
           <ol>{programOutcomes[p.id].map(([tr,english]) => <li key={tr}>{t(tr,english)}</li>)}</ol>
-        </section>
+        </DetailSection>
         <section className="program-conditions" aria-label={t("Kabul ve mezuniyet koşulları", "Admission and graduation requirements")}>
-          <section aria-labelledby="admission-title">
+          <DetailSection sectionId="admission-title" aria-labelledby="admission-title">
             <h2 id="admission-title">{t("Kabul koşulları", "Admission requirements")}</h2>
             <p>{isUndergraduate
               ? t("Programa başvuru ve kayıt sürecinde adayın önceki öğrenimini tamamlamış olması ve başvurduğu kabul yolunun koşullarını sağlaması beklenir. Merkezi yerleştirme, yatay geçiş ve uluslararası öğrenci başvuruları kendi başvuru süreçleri kapsamında değerlendirilir. Başvuru takvimi, istenen belgeler ve güncel koşullar ilgili eğitim-öğretim yılına ait üniversite duyurularından takip edilir.", "Applicants are expected to have completed their prior education and meet the conditions of their chosen admission route. Central placement, transfer and international applications are considered through their respective processes. Application dates, required documents and current conditions should be checked in the university announcements for the relevant academic year.")
               : isDoctoral ? t("Doktora başvuruları için yüksek lisans derecesi ve ilgili lisansüstü başvuru ilanında belirtilen koşullar aranır. Güncel sınav, dil, belge ve başvuru şartları ilgili dönem duyurularından takip edilmelidir.", "Doctoral applicants are expected to hold a master's degree and meet the conditions in the relevant graduate admission announcement. Current examination, language, document and application requirements should be checked in the applicable notice.")
               : t("Programa başvuruda adayın lisans eğitimini tamamlamış olması ve ilgili lisansüstü başvuru ilanındaki koşulları sağlaması beklenir. Başvurular; önceki öğrenim alanı, akademik başarı ve ilanda belirtilen değerlendirme ölçütleri kapsamında incelenir. Kontenjanlar, gerekli belgeler, sınav veya dil koşulları ve başvuru tarihleri ilgili dönemin enstitü duyurularından takip edilir.", "Applicants are expected to hold an undergraduate degree and meet the conditions stated in the relevant graduate admission announcement. Applications are assessed according to prior study, academic achievement and the published selection criteria. Available places, required documents, examination or language requirements and dates should be checked in the graduate school announcements.")}</p>
-          </section>
-          <section aria-labelledby="graduation-title">
+          </DetailSection>
+          <DetailSection sectionId="graduation-title" aria-labelledby="graduation-title">
             <h2 id="graduation-title">{t("Mezuniyet koşulları", "Graduation requirements")}</h2>
             <p>{isUndergraduate
               ? t(`Mezuniyet için programın ders planında yer alan zorunlu ve seçmeli derslerin başarıyla tamamlanması ve toplam ${p.ects} AKTS yükünün karşılanması beklenir. Programda tanımlanmışsa staj, uygulama ve bitirme çalışması gibi yükümlülüklerin de tamamlanması gerekir. Akademik başarı ve diğer mezuniyet koşulları, öğrencinin tabi olduğu müfredat ve yürürlükteki üniversite düzenlemeleri doğrultusunda değerlendirilir.`, `Graduation involves successful completion of the required and elective courses in the curriculum and a total of ${p.ects} ECTS. Any internship, practical work or final project specified by the program must also be completed. Academic achievement and other graduation conditions are assessed under the student's applicable curriculum and current university regulations.`)
               : isDoctoral ? t(`Doktora derecesi için ders ve araştırma yükümlülüklerinin, yeterlilik ve tez süreçlerinin ilgili lisansüstü düzenlemelere göre tamamlanması beklenir. Toplam örnek yük ${p.ects} AKTS'dir.`, `The doctoral pathway requires completing coursework, research, qualification and thesis requirements under the applicable graduate regulations. The illustrative total load is ${p.ects} ECTS.`) : t(`Mezuniyet için programın ders ve araştırma yükümlülüklerinin tamamlanması ve toplam ${p.ects} AKTS yükünün karşılanması beklenir. Tezli program kapsamında araştırmanın hazırlanması, tez çalışmasının tamamlanması ve ilgili değerlendirme süreçlerinde başarılı olunması gerekir. Ayrıntılı başarı, süre ve teslim koşulları öğrencinin tabi olduğu enstitü düzenlemeleri ve müfredat kapsamında değerlendirilir.`, `Graduation involves completing the program's coursework and research obligations and a total of ${p.ects} ECTS. The thesis pathway includes conducting research, completing a thesis and successfully meeting the relevant assessment requirements. Detailed achievement, duration and submission conditions are governed by the applicable graduate school regulations and curriculum.`)}</p>
-          </section>
+          </DetailSection>
         </section>
-        <section className="career-section" aria-labelledby="career-title">
+        <DetailSection sectionId="career-title" className="career-section" aria-labelledby="career-title">
           <h2 id="career-title">{t("Kariyer olanakları", "Career opportunities")}</h2>
           <div className="career-grid">
             {programCareers[p.id].map((career, index) => <article className="career-card" key={career.en}>
@@ -74,9 +77,9 @@ export default function ProgramDetail({ program: p }: { program: typeof programs
               <p>{t(career.descriptionTr, career.descriptionEn)}</p>
             </article>)}
           </div>
-        </section>
+        </DetailSection>
         <CurriculumSelector id={p.id} years={p.years} en={en} />
-        <section className="program-contact" aria-labelledby="contact-title">
+        <DetailSection sectionId="contact-title" className="program-contact" aria-labelledby="contact-title">
           <h2 id="contact-title">{t("İletişim bilgileri", "Contact information")}</h2>
           <dl>
             <div><dt>{t("İlgili birim", "Contact unit")}</dt><dd>{t(programContacts[p.id].unitTr,programContacts[p.id].unitEn)}</dd></div>
@@ -84,7 +87,7 @@ export default function ProgramDetail({ program: p }: { program: typeof programs
             <div><dt>{t("Adres", "Address")}</dt><dd>{t(programContacts[p.id].addressTr,programContacts[p.id].addressEn)}</dd></div>
             <div><dt>{t("İletişim saatleri", "Office hours")}</dt><dd>{t(programContacts[p.id].hoursTr,programContacts[p.id].hoursEn)}</dd></div>
           </dl>
-        </section>
+        </DetailSection>
       </section>
 
       </div>

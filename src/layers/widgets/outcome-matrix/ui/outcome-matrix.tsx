@@ -1,3 +1,4 @@
+import DetailSection from "@/layers/shared/ui/detail-section";
 import programOutcomes from "@/layers/entities/program/model/program-outcomes";
 import {getCourseOutcomes} from "@/layers/entities/course/model/course-outcomes";
 import {getOutcomeContributions} from "@/layers/entities/course/model/outcome-matrix";
@@ -6,7 +7,7 @@ export default function OutcomeMatrix({programId,title,en}:{programId:string;tit
  const outcomes=getCourseOutcomes(title),program=programOutcomes[programId];
  const values=getOutcomeContributions(outcomes.length,program.length);
  const po=t("PK","PO"),co=t("DK","CO");
- return <section className="course-table-section outcome-matrix" aria-labelledby="matrix-title">
+ return <DetailSection sectionId="matrix-title" className="course-table-section outcome-matrix" aria-labelledby="matrix-title">
   <h2 id="matrix-title">{t("Ders ve program kazanımları ilişkisi","Course and program outcomes mapping")}</h2>
   <p className="outcomes-intro" id="matrix-scale">{t("Katkı düzeyi: 0 — Yok · 1 — Düşük · 2 — Orta · 3 — Yüksek","Contribution: 0 — None · 1 — Low · 2 — Moderate · 3 — High")}</p>
   <table className="outcome-table" aria-describedby="matrix-scale">
@@ -16,5 +17,5 @@ export default function OutcomeMatrix({programId,title,en}:{programId:string;tit
   </table>
   <h3>{t("Program kazanımları","Program outcomes")}</h3>
   <dl className="matrix-legend">{program.map(([tr,english],i)=><div key={i}><dt>{po}{i+1}</dt><dd>{t(tr,english)}</dd></div>)}</dl>
- </section>;
+ </DetailSection>;
 }

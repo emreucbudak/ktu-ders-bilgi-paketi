@@ -1,4 +1,5 @@
 "use client";
+import DetailSection from "@/layers/shared/ui/detail-section";
 
 import Link from "next/link";
 import { getCourseWorkload } from "@/layers/entities/course/model/course-assessment";
@@ -12,7 +13,7 @@ export default function CurriculumSelector({ id, years, en }: { id: string; year
  const t=(tr:string,english:string)=>en?english:tr;
  const courses=getSampleCourses(id,Number(studyYear),term);
  const totalWorkload=courses.filter(c=>c.status!=="closed").reduce((sum,c)=>sum+getCourseWorkload(c.theoryHours,c.practiceHours,c.ects).reduce((hours,row)=>hours+row.count*row.hours,0),0);
- return <section className="curriculum-selector" aria-labelledby="curriculum-title">
+ return <DetailSection sectionId="curriculum-title" className="curriculum-selector" aria-labelledby="curriculum-title">
    <h2 id="curriculum-title">{t("Ders planı","Curriculum")}</h2>
    <div className="curriculum-fields">
      <label htmlFor="academic-year">{t("Eğitim-öğretim yılı","Academic year")}<select id="academic-year" value={academicYear} onChange={e=>setAcademicYear(e.target.value)}>{academicYears.map(y=><option key={y}>{y}</option>)}</select></label>
@@ -34,7 +35,7 @@ export default function CurriculumSelector({ id, years, en }: { id: string; year
      </table>
      <div className="curriculum-total"><strong>{t("Dönem toplamı","Semester total")}</strong><span>{courses.filter(c=>c.status!=="closed").reduce((sum,c)=>sum+c.credit,0)} {t("kredi","credits")} · {courses.filter(c=>c.status!=="closed").reduce((sum,c)=>sum+c.ects,0)} {t("AKTS","ECTS")} · {totalWorkload} {t("saat iş yükü","hours of workload")}</span></div>
    </div>
- </section>;
+ </DetailSection>;
 }
 
 
